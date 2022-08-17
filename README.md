@@ -27,8 +27,8 @@ Simulation tools can use ST-Link or JLink.
 
 If you need a Dev board, plese try,
 
-- [CANBed Dual](https://www.longan-labs.cc/1030016.html)
-- [Wio E5 CAN FD dev board](https://www.longan-labs.cc/1030008.html)
+- [CANBed Dual](https://www.seeedstudio.com/CANBed-DUAL-RP2040-based-Arduino-CAN-Bus-dev-board-2-independent-CAN2-0-CAN-FD-p-5377.html)
+- [Wio E5 CAN FD dev board](https://www.seeedstudio.com/LoRa-E5-CAN-FD-dev-kit-CANBUS-p-5398.html)
 
 
 ## License
@@ -59,7 +59,4 @@ SOFTWARE.
 
 ## Contact us
 
-If you have any question, please feel free to contact [support@longan-labs.cc](support@longan-labs.cc)
-
-
-[![Analytics](https://ga-beacon.appspot.com/UA-101965714-1/Longan_CANFD)](https://github.com/igrigorik/ga-beacon)
+If you have any question, please feel free to contact [info@longan-labs.cc](info@longan-labs.cc)
