@@ -192,8 +192,8 @@ void can1SaveData()
 */
 void i2c_config(void)
 {
-		//i2c_deinit(I2C0);
-		rcu_periph_clock_enable(RCU_I2C0);
+    //i2c_deinit(I2C0);
+    rcu_periph_clock_enable(RCU_I2C0);
     gpio_init(GPIOB, GPIO_MODE_AF_OD, GPIO_OSPEED_50MHZ, GPIO_PIN_6 | GPIO_PIN_7);        // i2c gpio config, PB7/6 - SDA/SCL
     /* I2C clock configure */
     i2c_clock_config(I2C0, 100000, I2C_DTCY_2);
@@ -381,7 +381,7 @@ void can_config1(unsigned char *str)
 
 void canInit()
 {
-    
+
     int i=0;
 
     unsigned long can20_baud = 500000;
@@ -407,16 +407,16 @@ void canInit()
     unsigned long mf_mask3  = 0;
     unsigned long mf_filt3  = 0;
 
-		
+
     for(i=0; i<48; i++)
-		{
-				can0config[i] = 0;
-				can1config[i] = 0;
-		}
+    {
+        can0config[i] = 0;
+        can1config[i] = 0;
+    }
 
     long2char(can20_baud, &can0config[0]);
     long2char(canfd_baud, &can0config[4]);
-		long2char(can20_baud, &can1config[0]);
+    long2char(can20_baud, &can1config[0]);
     long2char(canfd_baud, &can1config[4]);
 
     // set mask&filt 0
@@ -424,8 +424,8 @@ void canInit()
     can0config[9] = mf_ext0;
     long2char(mf_mask0, &can0config[10]);
     long2char(mf_filt0, &can0config[14]);
-		
-		can1config[8] = mf_set0;
+
+    can1config[8] = mf_set0;
     can1config[9] = mf_ext0;
     long2char(mf_mask0, &can1config[10]);
     long2char(mf_filt0, &can1config[14]);
@@ -435,8 +435,8 @@ void canInit()
     can0config[19] = mf_ext1;
     long2char(mf_mask1, &can0config[20]);
     long2char(mf_filt1, &can0config[24]);
-		
-		can1config[18] = mf_set1;
+
+    can1config[18] = mf_set1;
     can1config[19] = mf_ext1;
     long2char(mf_mask1, &can1config[20]);
     long2char(mf_filt1, &can1config[24]);
@@ -446,8 +446,8 @@ void canInit()
     can0config[29] = mf_ext2;
     long2char(mf_mask2, &can0config[30]);
     long2char(mf_filt2, &can0config[34]);
-		
-		can1config[28] = mf_set2;
+
+    can1config[28] = mf_set2;
     can1config[29] = mf_ext2;
     long2char(mf_mask2, &can1config[30]);
     long2char(mf_filt2, &can1config[34]);
@@ -457,13 +457,13 @@ void canInit()
     can0config[39] = mf_ext3;
     long2char(mf_mask3, &can0config[40]);
     long2char(mf_filt3, &can0config[44]);
-		
-		can1config[38] = mf_set3;
+
+    can1config[38] = mf_set3;
     can1config[39] = mf_ext3;
     long2char(mf_mask3, &can1config[40]);
     long2char(mf_filt3, &can1config[44]);
-		
-		
+
+
 
     can_config0(can0config);
     can_config1(can1config);
@@ -475,57 +475,57 @@ int getI2CDta(unsigned char *dta)
 {
     int len = 0;
     int i=0;
-	
-		unsigned long tout = 0;
-	
+
+    unsigned long tout = 0;
+
     if(!i2c_flag_get(I2C0, I2C_FLAG_ADDSEND))return len;
-	
+
     i2c_flag_clear(I2C0, I2C_FLAG_ADDSEND);
 
 #if DBUG
     while(!i2c_flag_get(I2C0, I2C_FLAG_RBNE))
-		{
-				__NOP;
-				tout++;
-				if(tout > 5000)
-				{
-					//i2c_config();
-					//i2c_flag_clear(I2C0, I2C_FLAG_RBNE);
-					return 0;
-				}
-		}
+    {
+        __NOP;
+        tout++;
+        if(tout > 5000)
+        {
+            //i2c_config();
+            //i2c_flag_clear(I2C0, I2C_FLAG_RBNE);
+            return 0;
+        }
+    }
 #else
-		while(!i2c_flag_get(I2C0, I2C_FLAG_RBNE));
+    while(!i2c_flag_get(I2C0, I2C_FLAG_RBNE));
 #endif
-		tout = 0;
+    tout = 0;
 
     while(i2c_flag_get(I2C0, I2C_FLAG_RBNE))
     {
         dta[len++] = i2c_data_receive(I2C0);
         for(i=0; i<3000; i++)
         __NOP;
-			
-				if(len > 73)
-				{
-					//i2c_flag_clear(I2C0, I2C_FLAG_RBNE);
-					return 0;
-				}
+
+        if(len > 73)
+        {
+            //i2c_flag_clear(I2C0, I2C_FLAG_RBNE);
+            return 0;
+        }
     }
-		
+
 #if DBUG
     while(!i2c_flag_get(I2C0, I2C_FLAG_STPDET))
-		{
-				__NOP;
-				tout++;
-				if(tout > 5000)
-				{
-						//i2c_config();
-						//i2c_flag_clear(I2C0, I2C_FLAG_STPDET);
-						return 0;
-				}
-		}
+    {
+        __NOP;
+        tout++;
+        if(tout > 5000)
+        {
+            //i2c_config();
+            //i2c_flag_clear(I2C0, I2C_FLAG_STPDET);
+            return 0;
+        }
+    }
 #else
-		while(!i2c_flag_get(I2C0, I2C_FLAG_STPDET));
+    while(!i2c_flag_get(I2C0, I2C_FLAG_STPDET));
 #endif
     i2c_enable(I2C0);
     return len;
@@ -537,65 +537,65 @@ int sendI2CDta(unsigned char *dta, int dlen)
 {
 
     int i=0;
-		unsigned long tout = 0;
+    unsigned long tout = 0;
     /* wait until ADDSEND bit is set */
     //if(!i2c_flag_get(I2C0, I2C_FLAG_ADDSEND))return 0;
     while(!i2c_flag_get(I2C0, I2C_FLAG_ADDSEND))
-		{
-				__NOP;
-				tout++;
-				if(tout > 5000)
-				{
-					//i2c_config();
-					i2c_flag_clear(I2C0, I2C_FLAG_ADDSEND);
-					return 0;
-				}
-		}
-		tout = 0;
+    {
+        __NOP;
+        tout++;
+        if(tout > 5000)
+        {
+            //i2c_config();
+            i2c_flag_clear(I2C0, I2C_FLAG_ADDSEND);
+            return 0;
+        }
+    }
+    tout = 0;
     //if(!i2c_flag_get(I2C0, I2C_FLAG_ADDSEND))return 0;
     /* clear ADDSEND bit */
     i2c_flag_clear(I2C0, I2C_FLAG_ADDSEND);
 
     /* wait until the transmission data register is empty */
     while(!i2c_flag_get(I2C0, I2C_FLAG_TBE))
-		{
-				__NOP;
-				tout++;
-				if(tout > 5000)
-				{
-					i2c_flag_clear(I2C0, I2C_FLAG_TBE);
-					return 0;
-				}
-		}
-		tout = 0;
+    {
+        __NOP;
+        tout++;
+        if(tout > 5000)
+        {
+            i2c_flag_clear(I2C0, I2C_FLAG_TBE);
+            return 0;
+        }
+    }
+    tout = 0;
 
     for(i=0;i<dlen;i++){
         /* send a data byte */
         i2c_data_transmit(I2C0, dta[i]);
         /* wait until the transmission data register is empty */
         while(!i2c_flag_get(I2C0, I2C_FLAG_TBE))
-				{
-						__NOP;
-						tout++;
-						if(tout > 5000)
-						{
-							i2c_flag_clear(I2C0, I2C_FLAG_TBE);
-							return 0;
-						}
-				}
-				tout = 0;
+        {
+            __NOP;
+            tout++;
+            if(tout > 5000)
+            {
+                i2c_flag_clear(I2C0, I2C_FLAG_TBE);
+                return 0;
+            }
+        }
+        tout = 0;
     }
     /* the master doesn't acknowledge for the last byte */
     while(!i2c_flag_get(I2C0, I2C_FLAG_AERR))
-		{
-				__NOP;
-				tout++;
-				if(tout > 5000)
-				{
-					i2c_flag_clear(I2C0, I2C_FLAG_AERR);
-					return 0;
-				}
-		}
+    {
+        __NOP;
+        tout++;
+        if(tout > 5000)
+        {
+            i2c_flag_clear(I2C0, I2C_FLAG_AERR);
+            return 0;
+        }
+    }
     /* clear the bit of AERR */
     i2c_flag_clear(I2C0, I2C_FLAG_AERR);
 
@@ -625,8 +625,8 @@ int main(void)
 
     LGI_Init();
     Serial_begin(115200);
-	
-		/* configure GPIO */
+
+        /* configure GPIO */
     can_gpio_config();
     canInit();
 
@@ -791,19 +791,19 @@ int main(void)
 
                 case REG_ADDR_CONFIG:
 
-								memcpy(can0config, &i2cDta[1], 48);
-								
+                memcpy(can0config, &i2cDta[1], 48);
+
                 can_config0(can0config);
-								can_config1(can1config);
+                can_config1(can1config);
 
                 break;
 
 
                 case REG1_ADDR_CONFIG:
-								memcpy(can1config, &i2cDta[1], 48);
-								
+                memcpy(can1config, &i2cDta[1], 48);
+
                 can_config0(can0config);
-								can_config1(can1config);
+                can_config1(can1config);
 
                 break;
 

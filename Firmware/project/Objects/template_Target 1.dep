@@ -31,7 +31,7 @@ I (..\Library\Include\gd32c10x_wwdgt.h)(0x61B9D236)
 I (..\Library\Include\gd32c10x_misc.h)(0x61B9D236)
 I (..\Library\Include\gd32c10x_exmc.h)(0x61B9D234)
 F (..\Startup\startup_gd32c10x.s)(0x61B9D235)(--cpu Cortex-M4.fp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\GigaDevice\GD32C10x_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526" --pd "GD32C10x SETA 1"--list .\listings\startup_gd32c10x.lst --xref -o .\objects\startup_gd32c10x.o --depend .\objects\startup_gd32c10x.d)
-F (..\User\main.c)(0x62FD7801)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\Library\Include -I ..\User -I ..\CMSIS\GD\GD32C10x\Include -I ..\Utilities -I ..\Utilities\LCD_Commom-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\GigaDevice\GD32C10x_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DGD32C10x -DGD32C10X_MD -D__FPU_PRESENT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\User\main.c)(0x62FDB3B3)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\Library\Include -I ..\User -I ..\CMSIS\GD\GD32C10x\Include -I ..\Utilities -I ..\Utilities\LCD_Commom-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\GigaDevice\GD32C10x_DFP\1.0.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DGD32C10x -DGD32C10X_MD -D__FPU_PRESENT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599EDB3C)
 I (..\CMSIS\GD\GD32C10x\Include\gd32c10x.h)(0x6278BD87)
 I (..\CMSIS\core_cm4.h)(0x61B9D235)
